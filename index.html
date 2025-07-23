@@ -56,10 +56,11 @@
             background-color: #ef4444;
         }
         .chat-widget {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 999;
+            position: relative;
+            bottom: auto;
+            left: 0px;
+            margin-top: 2rem;
+            z-index: 1;
         }
         .chat-messages {
             max-height: 300px;
@@ -952,7 +953,7 @@
 
     <!-- Chat Widget -->
     <div class="chat-widget">
-        <div id="chatToggle" class="bg-indigo-600 text-white p-4 rounded-full shadow-lg cursor-pointer hover:bg-indigo-700 float-left">
+        <div id="chatToggle" class="bg-indigo-600 text-white p-4 rounded-full shadow-lg cursor-pointer hover:bg-indigo-700">
             <i data-lucide="message-circle" class="w-6 h-6"></i>
         </div>
         <div id="chatBox" class="hidden bg-white shadow-xl rounded-lg w-80 h-96 flex flex-col">
