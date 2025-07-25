@@ -977,8 +977,7 @@
             document.getElementById("dashboardBtn").onclick = () => openModal("dashboardModal");
             document.getElementById("filterBtn").onclick = () => openModal("filterModal");
             document.getElementById("addListingBtn").onclick = () => openModal("addListingModal");
-            document.getElementById("mobileLoginBtn").onclick = () => openModal("loginModal");
-            document.getElementById("mobileSignupBtn").onclick = () => openModal("signupModal");
+           
         
             // Switch modals
             document.getElementById("switchToSignup").onclick = () => {
@@ -1260,6 +1259,52 @@ document.querySelectorAll(".modal-close").forEach(btn => {
   menuBtn.addEventListener('click', () => {
     mobileMenu.classList.toggle('hidden');
   });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Mobile menu toggle
+    const menuBtn = document.getElementById("mobileMenuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    if (menuBtn && mobileMenu) {
+      menuBtn.onclick = () => {
+        mobileMenu.classList.toggle("hidden");
+      };
+    }
+
+    // Modal toggles
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.add("active");
+    }
+
+    function closeModals() {
+      document.querySelectorAll(".modal").forEach(modal => modal.classList.remove("active"));
+    }
+
+    document.querySelectorAll(".modal-close").forEach(btn => {
+      btn.onclick = closeModals;
+    });
+
+    const loginBtn = document.getElementById("loginBtn");
+    const signupBtn = document.getElementById("signupBtn");
+    const dashboardBtn = document.getElementById("dashboardBtn");
+    const filterBtn = document.getElementById("filterBtn");
+    const addListingBtn = document.getElementById("addListingBtn");
+
+    if (loginBtn) loginBtn.onclick = () => openModal("loginModal");
+    if (signupBtn) signupBtn.onclick = () => openModal("signupModal");
+    if (dashboardBtn) dashboardBtn.onclick = () => openModal("dashboardModal");
+    if (filterBtn) filterBtn.onclick = () => openModal("filterModal");
+    if (addListingBtn) addListingBtn.onclick = () => openModal("addListingModal");
+
+    // 📱 Mobile Buttons
+    const mobileLoginBtn = document.getElementById("mobileLoginBtn");
+    const mobileSignupBtn = document.getElementById("mobileSignupBtn");
+
+    if (mobileLoginBtn) mobileLoginBtn.onclick = () => openModal("loginModal");
+    if (mobileSignupBtn) mobileSignupBtn.onclick = () => openModal("signupModal");
+  });
+         
             
 
 
