@@ -957,37 +957,54 @@
         <script>
             lucide.createIcons();
         
-            // Mobile menu toggle
-            document.getElementById("mobileMenuBtn").onclick = () => {
-                document.getElementById("mobileMenu").classList.toggle("hidden");
-            };
-        
-            // Modal toggles
-            function openModal(id) {
-                document.getElementById(id).classList.add("active");
-            }
-            function closeModals() {
-                document.querySelectorAll(".modal").forEach(modal => modal.classList.remove("active"));
-            }
-            document.querySelectorAll(".modal-close").forEach(btn => {
-                btn.onclick = closeModals;
-            });
-            document.getElementById("loginBtn").onclick = () => openModal("loginModal");
-            document.getElementById("signupBtn").onclick = () => openModal("signupModal");
-            document.getElementById("dashboardBtn").onclick = () => openModal("dashboardModal");
-            document.getElementById("filterBtn").onclick = () => openModal("filterModal");
-            document.getElementById("addListingBtn").onclick = () => openModal("addListingModal");
-           
-        
-            // Switch modals
-            document.getElementById("switchToSignup").onclick = () => {
-                closeModals();
-                openModal("signupModal");
-            };
-            document.getElementById("switchToLogin").onclick = () => {
-                closeModals();
-                openModal("loginModal");
-            };
+           document.addEventListener("DOMContentLoaded", function () {
+    // Mobile menu toggle
+    const menuBtn = document.getElementById("mobileMenuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    if (menuBtn && mobileMenu) {
+      menuBtn.onclick = () => {
+        mobileMenu.classList.toggle("hidden");
+      };
+    }
+
+    // Modal toggles
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.add("active");
+    }
+
+    function closeModals() {
+      document.querySelectorAll(".modal").forEach(modal => modal.classList.remove("active"));
+    }
+
+    document.querySelectorAll(".modal-close").forEach(btn => {
+      btn.onclick = closeModals;
+    });
+
+    // Desktop buttons
+    const loginBtn = document.getElementById("loginBtn");
+    if (loginBtn) loginBtn.onclick = () => openModal("loginModal");
+
+    const signupBtn = document.getElementById("signupBtn");
+    if (signupBtn) signupBtn.onclick = () => openModal("signupModal");
+
+    const dashboardBtn = document.getElementById("dashboardBtn");
+    if (dashboardBtn) dashboardBtn.onclick = () => openModal("dashboardModal");
+
+    const filterBtn = document.getElementById("filterBtn");
+    if (filterBtn) filterBtn.onclick = () => openModal("filterModal");
+
+    const addListingBtn = document.getElementById("addListingBtn");
+    if (addListingBtn) addListingBtn.onclick = () => openModal("addListingModal");
+
+    // ✅ Mobile buttons (now work correctly)
+    const mobileLoginBtn = document.getElementById("mobileLoginBtn");
+    if (mobileLoginBtn) mobileLoginBtn.onclick = () => openModal("loginModal");
+
+    const mobileSignupBtn = document.getElementById("mobileSignupBtn");
+    if (mobileSignupBtn) mobileSignupBtn.onclick = () => openModal("signupModal");
+  });
         
             // Dashboard tab switching
             document.querySelectorAll(".dashboard-tab").forEach(tab => {
@@ -1260,50 +1277,7 @@ document.querySelectorAll(".modal-close").forEach(btn => {
     mobileMenu.classList.toggle('hidden');
   });
 
-  document.addEventListener("DOMContentLoaded", function () {
-    // Mobile menu toggle
-    const menuBtn = document.getElementById("mobileMenuBtn");
-    const mobileMenu = document.getElementById("mobileMenu");
 
-    if (menuBtn && mobileMenu) {
-      menuBtn.onclick = () => {
-        mobileMenu.classList.toggle("hidden");
-      };
-    }
-
-    // Modal toggles
-    function openModal(id) {
-      const modal = document.getElementById(id);
-      if (modal) modal.classList.add("active");
-    }
-
-    function closeModals() {
-      document.querySelectorAll(".modal").forEach(modal => modal.classList.remove("active"));
-    }
-
-    document.querySelectorAll(".modal-close").forEach(btn => {
-      btn.onclick = closeModals;
-    });
-
-    const loginBtn = document.getElementById("loginBtn");
-    const signupBtn = document.getElementById("signupBtn");
-    const dashboardBtn = document.getElementById("dashboardBtn");
-    const filterBtn = document.getElementById("filterBtn");
-    const addListingBtn = document.getElementById("addListingBtn");
-
-    if (loginBtn) loginBtn.onclick = () => openModal("loginModal");
-    if (signupBtn) signupBtn.onclick = () => openModal("signupModal");
-    if (dashboardBtn) dashboardBtn.onclick = () => openModal("dashboardModal");
-    if (filterBtn) filterBtn.onclick = () => openModal("filterModal");
-    if (addListingBtn) addListingBtn.onclick = () => openModal("addListingModal");
-
-    // 📱 Mobile Buttons
-    const mobileLoginBtn = document.getElementById("mobileLoginBtn");
-    const mobileSignupBtn = document.getElementById("mobileSignupBtn");
-
-    if (mobileLoginBtn) mobileLoginBtn.onclick = () => openModal("loginModal");
-    if (mobileSignupBtn) mobileSignupBtn.onclick = () => openModal("signupModal");
-  });
          
             
 
