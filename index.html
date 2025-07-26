@@ -1153,76 +1153,56 @@ function renderListings(category = "") {
   });
 }
 
-// Attach event to category cards
-document.querySelectorAll(".category-card").forEach(card => {
-  card.addEventListener("click", () => {
-    const cat = card.getAttribute("data-category");
-    renderListings(cat);
-  });
-});
+ document.addEventListener("DOMContentLoaded", () => {
+    const serviceData = {
+      Plumbing: [
+        { name: "Ravi Plumbing Works", price: "₹299" },
+        { name: "Kanpur Plumbers", price: "₹349" },
+        { name: "Perfect Fix", price: "₹399" }
+      ],
+      Painting: [
+        { name: "HomeShine Painters", price: "₹499" },
+        { name: "ColorMyWalls", price: "₹599" },
+        { name: "Deluxe Painting", price: "₹699" }
+      ],
+      Electrical: [
+        { name: "PowerFix Electricians", price: "₹399" },
+        { name: "SafeWire Experts", price: "₹449" },
+        { name: "Bright Spark", price: "₹499" }
+      ],
+      "Salon at Home": [
+        { name: "Glamour Touch", price: "₹799" },
+        { name: "SalonXpress", price: "₹899" },
+        { name: "Beauty @ Home", price: "₹999" }
+      ]
+    };
 
- const serviceData = {
-    Plumbing: [
-      { name: "Ravi Plumbing Works", price: "₹299" },
-      { name: "Kanpur Plumbers", price: "₹349" },
-      { name: "Perfect Fix", price: "₹399" }
-    ],
-    Painting: [
-      { name: "HomeShine Painters", price: "₹499" },
-      { name: "ColorMyWalls", price: "₹599" },
-      { name: "Deluxe Painting", price: "₹699" }
-    ],
-    Electrical: [
-      { name: "PowerFix Electricians", price: "₹399" },
-      { name: "SafeWire Experts", price: "₹449" },
-      { name: "Bright Spark", price: "₹499" }
-    ],
-    "Salon at Home": [
-      { name: "Glamour Touch", price: "₹799" },
-      { name: "SalonXpress", price: "₹899" },
-      { name: "Beauty @ Home", price: "₹999" }
-    ]
-  };
+    document.querySelectorAll(".service-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const title = card.querySelector("h3").innerText;
+        const providers = serviceData[title];
 
-  document.querySelectorAll(".service-card").forEach(card => {
-    card.addEventListener("click", () => {
-      const title = card.querySelector("h3").innerText;
-      const providers = serviceData[title];
+        // Show section
+        document.getElementById("serviceListSection").classList.remove("hidden");
+        document.getElementById("serviceTitle").innerText = `${title} Providers`;
 
-      // Show section
-      document.getElementById("serviceListSection").classList.remove("hidden");
-      document.getElementById("serviceTitle").innerText = `${title} Providers`;
+        // Fill provider list
+        const providerList = document.getElementById("providerList");
+        providerList.innerHTML = ""; // Clear previous
+        providers.forEach(provider => {
+          const div = document.createElement("div");
+          div.className = "bg-white p-4 shadow rounded";
+          div.innerHTML = `
+            <h4 class="font-semibold text-lg">${provider.name}</h4>
+            <p class="text-gray-600">Starting at ${provider.price}</p>
+          `;
+          providerList.appendChild(div);
+        });
 
-      // Fill provider list
-      const providerList = document.getElementById("providerList");
-      providerList.innerHTML = ""; // Clear previous
-      providers.forEach(provider => {
-        const div = document.createElement("div");
-        div.className = "bg-white p-4 shadow rounded";
-        div.innerHTML = `
-          <h4 class="font-semibold text-lg">${provider.name}</h4>
-          <p class="text-gray-600">Starting at ${provider.price}</p>
-        `;
-        providerList.appendChild(div);
+        // Scroll to section
+        document.getElementById("serviceListSection").scrollIntoView({ behavior: "smooth" });
       });
-
-      // Scroll to section
-      document.getElementById("serviceListSection").scrollIntoView({ behavior: "smooth" });
     });
-  });
-
-// Close modal
-document.querySelectorAll(".modal-close").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.getElementById("providerModal").classList.remove("active");
-  });
-});
-
-  const menuBtn = document.getElementById('mobileMenuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  menuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
   });
 
         </script>
