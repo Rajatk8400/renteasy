@@ -1161,124 +1161,55 @@ document.querySelectorAll(".category-card").forEach(card => {
   });
 });
 
-// Initial load
-renderListings();
+ const serviceData = {
+    Plumbing: [
+      { name: "Ravi Plumbing Works", price: "₹299" },
+      { name: "Kanpur Plumbers", price: "₹349" },
+      { name: "Perfect Fix", price: "₹399" }
+    ],
+    Painting: [
+      { name: "HomeShine Painters", price: "₹499" },
+      { name: "ColorMyWalls", price: "₹599" },
+      { name: "Deluxe Painting", price: "₹699" }
+    ],
+    Electrical: [
+      { name: "PowerFix Electricians", price: "₹399" },
+      { name: "SafeWire Experts", price: "₹449" },
+      { name: "Bright Spark", price: "₹499" }
+    ],
+    "Salon at Home": [
+      { name: "Glamour Touch", price: "₹799" },
+      { name: "SalonXpress", price: "₹899" },
+      { name: "Beauty @ Home", price: "₹999" }
+    ]
+  };
 
-const PopularserviceCardMap = {
-  plumbing: "Plumbing",
-  painting: "Painting",
-  electrical: "Electrical",
-  salon: "Salon at Home"
-};
+  document.querySelectorAll(".service-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const title = card.querySelector("h3").innerText;
+      const providers = serviceData[title];
 
-document.querySelectorAll('.service-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const service = card.querySelector('h3').textContent.toLowerCase().replace(/\s+/g, '-');
-    showProviders(service);
-  });
-});
+      // Show section
+      document.getElementById("serviceListSection").classList.remove("hidden");
+      document.getElementById("serviceTitle").innerText = `${title} Providers`;
 
-function showProviders(serviceKey) {
-  const list = serviceProviders[serviceKey];
-  const container = document.getElementById("providerList");
-  const section = document.getElementById("serviceListSection");
-  const title = document.getElementById("serviceTitle");
-  
-  title.textContent = `Available ${serviceCardMap[serviceKey] || 'Services'}`;
-  container.innerHTML = '';
-
-  if (!list || list.length === 0) {
-    container.innerHTML = '<p>No providers available right now.</p>';
-  } else {
-    list.forEach(provider => {
-      const div = document.createElement('div');
-      div.className = "border p-4 rounded-lg shadow cursor-pointer hover:bg-gray-100";
-      div.innerHTML = `
-        <h4 class="font-semibold">${provider.name}</h4>
-        <p class="text-sm text-gray-600">₹${provider.price} / day</p>
-        <p class="text-sm text-yellow-600">Rating: ${provider.rating}</p>
-      `;
-      div.addEventListener('click', () => {
-        document.getElementById("providerName").textContent = provider.name;
-        document.getElementById("providerContact").textContent = provider.contact;
-        document.getElementById("providerPrice").textContent = provider.price;
-        document.getElementById("providerRating").textContent = provider.rating;
-        document.getElementById("providerModal").classList.add("active");
+      // Fill provider list
+      const providerList = document.getElementById("providerList");
+      providerList.innerHTML = ""; // Clear previous
+      providers.forEach(provider => {
+        const div = document.createElement("div");
+        div.className = "bg-white p-4 shadow rounded";
+        div.innerHTML = `
+          <h4 class="font-semibold text-lg">${provider.name}</h4>
+          <p class="text-gray-600">Starting at ${provider.price}</p>
+        `;
+        providerList.appendChild(div);
       });
-      container.appendChild(div);
+
+      // Scroll to section
+      document.getElementById("serviceListSection").scrollIntoView({ behavior: "smooth" });
     });
-  }
-
-  section.classList.remove("hidden");
-}
-
-const serviceProviders = {
-  plumbing: [
-    { name: "Amit Plumbing Services", contact: "9876543210", price: 299, rating: 4.8 },
-    { name: "Kanpur Pipe Repair", contact: "9123456789", price: 350, rating: 4.6 }
-  ],
-  painting: [
-    { name: "FreshCoat Painters", contact: "9988776655", price: 499, rating: 4.5 }
-  ],
-  electrical: [
-    { name: "SparkFix", contact: "9087654321", price: 399, rating: 4.9 }
-  ],
-  "salon-at-home": [
-    { name: "Home Salon Pro", contact: "9876512345", price: 799, rating: 4.7 }
-  ]
-};
-
-const serviceCardMap1 = {
-  plumbing: "Plumbing",
-  painting: "Painting",
-  electrical: "Electrical",
-  "salon-at-home": "Salon at Home"
-};
-
-function normalizeServiceName(text) {
-  return text.toLowerCase().replace(/\s+/g, '-');
-}
-
-document.querySelectorAll('.service-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const service = normalizeServiceName(card.querySelector('h3').textContent);
-    showProviders(service);
   });
-});
-
-function showProviders(serviceKey) {
-  const list = serviceProviders[serviceKey];
-  const container = document.getElementById("providerList");
-  const section = document.getElementById("serviceListSection");
-  const title = document.getElementById("serviceTitle");
-
-  title.textContent = `Available ${serviceCardMap[serviceKey] || 'Services'}`;
-  container.innerHTML = '';
-
-  if (!list || list.length === 0) {
-    container.innerHTML = '<p>No providers available right now.</p>';
-  } else {
-    list.forEach(provider => {
-      const div = document.createElement('div');
-      div.className = "border p-4 rounded-lg shadow cursor-pointer hover:bg-gray-100";
-      div.innerHTML = `
-        <h4 class="font-semibold">${provider.name}</h4>
-        <p class="text-sm text-gray-600">₹${provider.price} / day</p>
-        <p class="text-sm text-yellow-600">Rating: ${provider.rating} ⭐</p>
-      `;
-      div.addEventListener('click', () => {
-        document.getElementById("providerName").textContent = provider.name;
-        document.getElementById("providerContact").textContent = provider.contact;
-        document.getElementById("providerPrice").textContent = provider.price;
-        document.getElementById("providerRating").textContent = provider.rating;
-        document.getElementById("providerModal").classList.add("active");
-      });
-      container.appendChild(div);
-    });
-  }
-
-  section.classList.remove("hidden");
-}
 
 // Close modal
 document.querySelectorAll(".modal-close").forEach(btn => {
