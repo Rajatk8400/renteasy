@@ -108,14 +108,20 @@ const selectedCategory = urlParams.get("category");
 renderListings(selectedCategory);
 
   
-  document.getElementById("categoryFilter").addEventListener("change", function () {
-    const selected = this.value;
-    if (selected === "all") {
-      window.location.href = "products.html"; // No filter
-    } else {
-      window.location.href = `products.html?category=${selected}`;
-    }
-  });
+ const selectedCategory = urlParams.get("category");
+renderListings(selectedCategory);
+
+// Set dropdown to reflect current filter
+document.getElementById("categoryFilter").value = selectedCategory || "all";
+
+document.getElementById("categoryFilter").addEventListener("change", function () {
+  const selected = this.value;
+  if (selected === "all") {
+    window.location.href = "products.html";
+  } else {
+    window.location.href = `products.html?category=${selected}`;
+  }
+});
 
 
 </script>
