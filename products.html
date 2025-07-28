@@ -108,7 +108,7 @@ const selectedCategory = urlParams.get("category");
 renderListings(selectedCategory);
 
   
-<script>
+
   document.getElementById("categoryFilter").addEventListener("change", function () {
     const selected = this.value;
     if (selected === "all") {
@@ -117,7 +117,7 @@ renderListings(selectedCategory);
       window.location.href = `products.html?category=${selected}`;
     }
   });
-</script>
+
 
 
 
