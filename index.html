@@ -1152,8 +1152,7 @@ function renderListings(category = "") {
     listingsGrid.appendChild(card);
   });
 }
-            
- document.addEventListener("DOMContentLoaded", () => {
+     document.addEventListener("DOMContentLoaded", () => {
     const serviceData = {
       Plumbing: [
         { name: "Ravi Plumbing Services", price: "₹299" },
@@ -1182,10 +1181,21 @@ function renderListings(category = "") {
     const serviceTitle = document.getElementById("serviceTitle");
     const providerList = document.getElementById("providerList");
 
+    if (serviceCards.length === 0) {
+      console.warn("No service cards found on the page.");
+      return;
+    }
+
     serviceCards.forEach(card => {
       card.addEventListener("click", () => {
         const title = card.querySelector("h3").innerText.trim();
-        const providers = serviceData[title] || [];
+
+        if (!serviceData[title]) {
+          console.warn(`No data found for ${title}`);
+          return;
+        }
+
+        const providers = serviceData[title];
 
         // Show provider section
         serviceSection.classList.remove("hidden");
@@ -1207,7 +1217,7 @@ function renderListings(category = "") {
         serviceSection.scrollIntoView({ behavior: "smooth" });
       });
     });
-  });
+  });         
  
 
         </script>
