@@ -1152,58 +1152,63 @@ function renderListings(category = "") {
     listingsGrid.appendChild(card);
   });
 }
-
+            
  document.addEventListener("DOMContentLoaded", () => {
     const serviceData = {
       Plumbing: [
-        { name: "Ravi Plumbing Works", price: "₹299" },
-        { name: "Kanpur Plumbers", price: "₹349" },
-        { name: "Perfect Fix", price: "₹399" }
+        { name: "Ravi Plumbing Services", price: "₹299" },
+        { name: "QuickFix Plumbers", price: "₹349" },
+        { name: "WaterWorks", price: "₹399" }
       ],
       Painting: [
         { name: "HomeShine Painters", price: "₹499" },
-        { name: "ColorMyWalls", price: "₹599" },
-        { name: "Deluxe Painting", price: "₹699" }
+        { name: "Deluxe Colors", price: "₹599" },
+        { name: "Prime Paint Pros", price: "₹699" }
       ],
       Electrical: [
-        { name: "PowerFix Electricians", price: "₹399" },
-        { name: "SafeWire Experts", price: "₹449" },
-        { name: "Bright Spark", price: "₹499" }
+        { name: "ElectroFix Experts", price: "₹399" },
+        { name: "PowerHouse Electricians", price: "₹449" },
+        { name: "Bright Spark Services", price: "₹499" }
       ],
       "Salon at Home": [
         { name: "Glamour Touch", price: "₹799" },
-        { name: "SalonXpress", price: "₹899" },
-        { name: "Beauty @ Home", price: "₹999" }
+        { name: "StyleXpress", price: "₹899" },
+        { name: "Beauty OnCall", price: "₹999" }
       ]
     };
 
-    document.querySelectorAll(".service-card").forEach(card => {
+    const serviceCards = document.querySelectorAll(".service-card");
+    const serviceSection = document.getElementById("serviceListSection");
+    const serviceTitle = document.getElementById("serviceTitle");
+    const providerList = document.getElementById("providerList");
+
+    serviceCards.forEach(card => {
       card.addEventListener("click", () => {
-        const title = card.querySelector("h3").innerText;
-        const providers = serviceData[title];
+        const title = card.querySelector("h3").innerText.trim();
+        const providers = serviceData[title] || [];
 
-        // Show section
-        document.getElementById("serviceListSection").classList.remove("hidden");
-        document.getElementById("serviceTitle").innerText = `${title} Providers`;
+        // Show provider section
+        serviceSection.classList.remove("hidden");
+        serviceTitle.innerText = `${title} Providers`;
+        providerList.innerHTML = ""; // Clear old data
 
-        // Fill provider list
-        const providerList = document.getElementById("providerList");
-        providerList.innerHTML = ""; // Clear previous
+        // Add provider cards
         providers.forEach(provider => {
           const div = document.createElement("div");
-          div.className = "bg-white p-4 shadow rounded";
+          div.className = "bg-white p-4 rounded-lg shadow";
           div.innerHTML = `
-            <h4 class="font-semibold text-lg">${provider.name}</h4>
+            <h4 class="text-lg font-semibold text-gray-900 mb-1">${provider.name}</h4>
             <p class="text-gray-600">Starting at ${provider.price}</p>
           `;
           providerList.appendChild(div);
         });
 
-        // Scroll to section
-        document.getElementById("serviceListSection").scrollIntoView({ behavior: "smooth" });
+        // Scroll to the section
+        serviceSection.scrollIntoView({ behavior: "smooth" });
       });
     });
   });
+ 
 
         </script>
         </body>
