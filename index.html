@@ -1153,73 +1153,70 @@ function renderListings(category = "") {
   });
 }
      document.addEventListener("DOMContentLoaded", () => {
-    const serviceData = {
-      Plumbing: [
-        { name: "Ravi Plumbing Services", price: "₹299" },
-        { name: "QuickFix Plumbers", price: "₹349" },
-        { name: "WaterWorks", price: "₹399" }
-      ],
-      Painting: [
-        { name: "HomeShine Painters", price: "₹499" },
-        { name: "Deluxe Colors", price: "₹599" },
-        { name: "Prime Paint Pros", price: "₹699" }
-      ],
-      Electrical: [
-        { name: "ElectroFix Experts", price: "₹399" },
-        { name: "PowerHouse Electricians", price: "₹449" },
-        { name: "Bright Spark Services", price: "₹499" }
-      ],
-      "Salon at Home": [
-        { name: "Glamour Touch", price: "₹799" },
-        { name: "StyleXpress", price: "₹899" },
-        { name: "Beauty OnCall", price: "₹999" }
-      ]
-    };
+  const services = {
+    "Plumbing": [
+      { name: "Ravi Plumbing Works", contact: "9876543210", price: 299, rating: 4.8 },
+      { name: "City Pipe Fixers", contact: "9123456789", price: 349, rating: 4.7 }
+    ],
+    "Painting": [
+      { name: "Color Pro Services", contact: "9345612780", price: 499, rating: 4.6 },
+      { name: "Home Paint Hub", contact: "9988776655", price: 549, rating: 4.5 }
+    ],
+    "Electrical": [
+      { name: "Power Fix Electricians", contact: "9765432109", price: 399, rating: 4.9 },
+      { name: "City Current Pros", contact: "9456732101", price: 429, rating: 4.8 }
+    ],
+    "Salon at Home": [
+      { name: "GlamUp Studio", contact: "9876540987", price: 799, rating: 4.7 },
+      { name: "Beauty on Wheels", contact: "9988772233", price: 899, rating: 4.6 }
+    ]
+  };
 
-    const serviceCards = document.querySelectorAll(".service-card");
-    const serviceSection = document.getElementById("serviceListSection");
-    const serviceTitle = document.getElementById("serviceTitle");
-    const providerList = document.getElementById("providerList");
+  const serviceCards = document.querySelectorAll(".service-card");
+  const serviceListSection = document.getElementById("serviceListSection");
+  const serviceTitle = document.getElementById("serviceTitle");
+  const providerList = document.getElementById("providerList");
+  const modal = document.getElementById("providerModal");
+  const providerName = document.getElementById("providerName");
+  const providerContact = document.getElementById("providerContact");
+  const providerPrice = document.getElementById("providerPrice");
+  const providerRating = document.getElementById("providerRating");
+  const modalCloseBtn = modal.querySelector(".modal-close");
 
-    if (serviceCards.length === 0) {
-      console.warn("No service cards found on the page.");
-      return;
-    }
+  serviceCards.forEach(card => {
+    card.addEventListener("click", () => {
+      const title = card.querySelector("h3").textContent.trim();
+      const providers = services[title] || [];
+      serviceTitle.textContent = `${title} - Service Providers`;
+      providerList.innerHTML = "";
 
-    serviceCards.forEach(card => {
-      card.addEventListener("click", () => {
-        const title = card.querySelector("h3").innerText.trim();
-
-        if (!serviceData[title]) {
-          console.warn(`No data found for ${title}`);
-          return;
-        }
-
-        const providers = serviceData[title];
-
-        // Show provider section
-        serviceSection.classList.remove("hidden");
-        serviceTitle.innerText = `${title} Providers`;
-        providerList.innerHTML = ""; // Clear old data
-
-        // Add provider cards
-        providers.forEach(provider => {
-          const div = document.createElement("div");
-          div.className = "bg-white p-4 rounded-lg shadow";
-          div.innerHTML = `
-            <h4 class="text-lg font-semibold text-gray-900 mb-1">${provider.name}</h4>
-            <p class="text-gray-600">Starting at ${provider.price}</p>
-          `;
-          providerList.appendChild(div);
+      providers.forEach(provider => {
+        const div = document.createElement("div");
+        div.className = "bg-gray-100 p-4 rounded shadow hover:bg-gray-200 cursor-pointer transition";
+        div.innerHTML = `
+          <h4 class="font-semibold text-lg">${provider.name}</h4>
+          <p>Contact: ${provider.contact}</p>
+          <p>Price: ₹${provider.price}</p>
+          <p>Rating: ${provider.rating} ⭐</p>
+        `;
+        div.addEventListener("click", () => {
+          providerName.textContent = provider.name;
+          providerContact.textContent = provider.contact;
+          providerPrice.textContent = provider.price;
+          providerRating.textContent = provider.rating;
+          modal.classList.add("fixed", "inset-0", "flex", "items-center", "justify-center", "z-50", "bg-black", "bg-opacity-50");
         });
-
-        // Scroll to the section
-        serviceSection.scrollIntoView({ behavior: "smooth" });
+        providerList.appendChild(div);
       });
-    });
-  });         
- 
 
-        </script>
-        </body>
-        </html>
+      serviceListSection.classList.remove("hidden");
+    });
+  });
+
+  modalCloseBtn.addEventListener("click", () => {
+    modal.classList.remove("fixed", "inset-0", "flex", "items-center", "justify-center", "z-50", "bg-black", "bg-opacity-50");
+  });
+});       
+</script>
+</body>
+</html>
