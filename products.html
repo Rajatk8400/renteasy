@@ -33,37 +33,18 @@
       <label class="block mb-1 font-medium">Filter by Category</label>
       <select class="w-full md:w-64 border px-3 py-2 rounded-lg">
         <option>All</option>
-        <option>Construction Equipment</option>
-        <option>Construction Material</option>
-        <option>Paint</option>
-        <option>Tools</option>
+        <option>Electronics</option>
+        <option>Furniture</option>
+        <option>Vehicles</option>
+        <option>Construction</option>
+        <option>Home-Services</option>
+        <option>Professional</option>
       </select>
     </div>
 
     <div id="listingsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
 
-      <div class="bg-white p-4 rounded-lg shadow">
-        <img src="https://via.placeholder.com/300x180" class="w-full mb-4 rounded-md" alt="Product">
-        <h3 class="font-semibold text-lg">Concrete Mixer</h3>
-        <p class="text-sm text-gray-500 mb-2">Construction Equipment</p>
-        <button class="mt-2 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Rent Now</button>
-      </div>
-      <div class="bg-white p-4 rounded-lg shadow">
-        <img src="https://via.placeholder.com/300x180" class="w-full mb-4 rounded-md" alt="Product">
-        <h3 class="font-semibold text-lg">Paint Sprayer</h3>
-        <p class="text-sm text-gray-500 mb-2">Paint Equipment</p>
-        <button class="mt-2 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Rent Now</button>
-      </div>
-      <div class="bg-white p-4 rounded-lg shadow">
-        <img src="https://via.placeholder.com/300x180" class="w-full mb-4 rounded-md" alt="Product">
-        <h3 class="font-semibold text-lg">Bricks & Cement Pack</h3>
-        <p class="text-sm text-gray-500 mb-2">Construction Material</p>
-        <button class="mt-2 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Rent Now</button>
-      </div>
-    </div>
-  </section>
-    
-
+     
         
 
   <script>
@@ -125,6 +106,17 @@ const selectedCategory = urlParams.get("category");
 
 // Step 4: Call renderListings
 renderListings(selectedCategory);
+
+  
+  document.getElementById("categoryFilter").addEventListener("change", function () {
+    const selected = this.value;
+    if (selected === "all") {
+      window.location.href = "products.html"; // No filter
+    } else {
+      window.location.href = `products.html?category=${selected}`;
+    }
+  });
+
 
 </script>
 
