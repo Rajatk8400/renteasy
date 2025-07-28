@@ -60,5 +60,68 @@
       </div>
     </div>
   </section>
+
+  <script>
+// Step 1: All Listings
+const allListings = [
+  { title: "DSLR Camera", price: 1200, location: "kanpur", category: "electronics" },
+  { title: "Smart TV", price: 900, location: "kanpur", category: "electronics" },
+  { title: "Washing Machine", price: 700, location: "Kanpur", category: "electronics" },
+  { title: "AC", price: 1000, location: "Kanpur", category: "electronics" },
+  { title: "Microwave Oven", price: 400, location: "kanpur", category: "electronics" },
+  { title: "Refrigerator", price: 850, location: "kanpur", category: "electronics" },
+
+  { title: "Wooden Sofa Set", price: 600, location: "kanpur", category: "furniture" },
+  { title: "Office Chair", price: 250, location: "Kanpur", category: "furniture" },
+  { title: "Dining Table", price: 500, location: "kanpur", category: "furniture" },
+
+  { title: "Car", price: 300, location: "Kanpur", category: "vehicles" },
+  { title: "Bike", price: 1200, location: "kanpur", category: "vehicles" },
+
+  { title: "Drill Machine", price: 200, location: "Kanpur", category: "construction" },
+  { title: "Cement Mixer", price: 800, location: "Kanpur", category: "construction" },
+
+  { title: "Deep Cleaning Service", price: 1500, location: "Lucknow", category: "home-services" },
+  { title: "Pest Control", price: 900, location: "Kanpur", category: "home-services" },
+
+  { title: "Legal Consultation", price: 1000, location: "Online", category: "professional" },
+  { title: "CA Services", price: 850, location: "Delhi", category: "professional" }
+];
+
+// Step 2: Function to render listings
+function renderListings(category = "") {
+  const listingsGrid = document.getElementById("listingsGrid");
+  listingsGrid.innerHTML = ""; // Clear old items
+
+  const filtered = category
+    ? allListings.filter(item => item.category === category)
+    : allListings;
+
+  if (filtered.length === 0) {
+    listingsGrid.innerHTML = "<p class='text-gray-500'>No listings found.</p>";
+    return;
+  }
+
+  filtered.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "bg-white p-4 rounded-lg shadow-md card-hover";
+    card.innerHTML = `
+      <div class='mb-2 font-bold text-lg'>${item.title}</div>
+      <div class='text-sm text-gray-600 mb-1'>${item.location}</div>
+      <div class='text-indigo-600 font-semibold'>₹${item.price}</div>
+    `;
+    listingsGrid.appendChild(card);
+  });
+}
+
+// Step 3: Get category from URL parameter
+const urlParams = new URLSearchParams(window.location.search);
+const selectedCategory = urlParams.get("category");
+
+// Step 4: Call renderListings
+renderListings(selectedCategory);
+
+</script>
+
 </body>
 </html>
