@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://easyrent.pages.dev/</loc>
+    <priority>1.00</priority>
+  </url>
+  
+  <url>
+    <loc>https://easyrent.pages.dev/about.html</loc>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://easyrent.pages.dev/products.html</loc>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://easyrent.pages.dev/services.html</loc>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://easyrent.pages.dev/contact.html</loc>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://easyrent.pages.dev/blog/top-5-home-services-in-kanpur.html</loc>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://easyrent.pages.dev/blog/why-online-service-booking-is-better.html</loc>
+    <priority>0.70</priority>
+  </url>
+
+</urlset>
